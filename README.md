@@ -1,10 +1,19 @@
-# Getting Started with Create React App
+# Web based code editor 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `cd backend`
+
+### `npm start`
+
+Runs the api in the development mode.\
+using [http://localhost:3001](http://localhost:3001)
+
+### `cd ..`
 
 ### `npm start`
 
@@ -29,42 +38,118 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Web-Based Code Editor System
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## System Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Frontend (Client-Side):
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Code Editor Interface:
+- Allows users to write and edit code.
+- Supports syntax highlighting for different programming languages.
+- Provides a text area for input and output display.
 
-## Learn More
+#### Tabs Manager:
+- Manages multiple code tabs concurrently.
+- Allows users to open, close, and switch between tabs seamlessly.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### File Naming and Extension:
+- Enables users to add new file names and extensions for each code tab.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Styling:
+- Enhances the user interface with styling for better code view.
 
-### Code Splitting
+#### Communication with Backend:
+- Sends code and language information to the backend for execution.
+- Retrieves and displays the output received from the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Auto-Saving:
+- Saves code state in local storage to retain it when the webpage is refreshed or closed.
 
-### Analyzing the Bundle Size
+### Backend (Server-Side):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### RESTful API (Express.js):
+- Provides endpoints for code execution, e.g., `/api/execute`.
+- Receives code and language information from the frontend.
 
-### Making a Progressive Web App
+#### Code Execution:
+- Executes Python, TypeScript, and JavaScript code based on the specified language.
+- Uses temporary files for code execution.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### File Handling:
+- Manages temporary files for each code execution.
+- Writes code to a temporary file before execution.
 
-### Advanced Configuration
+#### Error Handling:
+- Catches errors during code execution and returns appropriate responses.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## System Flow
 
-### Deployment
+1. **User Interaction:**
+   - Users interact with the frontend, writing and editing code, managing tabs, and initiating code execution.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Frontend Communication:**
+   - Frontend sends requests to the backend API, providing code, language, and other relevant information.
 
-### `npm run build` fails to minify
+3. **Backend Processing:**
+   - Backend receives the requests and processes them.
+   - It executes the code using the appropriate language runtime (Python, TypeScript, or Node.js).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4. **Code Execution:**
+   - Temporary files are created to store the user's code.
+   - The backend executes the code and captures the output.
+
+5. **Backend Response:**
+   - The backend sends the output or error information back to the frontend.
+
+6. **Frontend Display:**
+   - The frontend displays the output or error to the user in the code editor interface.
+
+7. **Auto-Saving:**
+   - Code state is auto-saved to local storage, allowing users to resume their work after refreshing or closing the webpage.
+
+## Data Flow
+
+- Data flows from the frontend to the backend through API requests.
+- Temporary files are used for handling code during execution.
+- Output from code execution flows back from the backend to the frontend.
+
+## Technologies
+
+### Frontend:
+
+- React.js for building the user interface.
+- Local storage for auto-saving code state.
+- RESTful API for communication with the backend.
+
+### Backend:
+
+- Node.js with Express.js for building the server.
+- Child process module for executing code in different languages.
+
+## Considerations (<code>With proper planning and time</code>)
+
+### Security:
+
+- Implement proper input validation and sanitization to prevent code injection.
+- Secure the communication between the frontend and backend.
+
+### Scalability:
+
+- Consider horizontal scaling for handling increased traffic.
+- Load balancing strategies to distribute requests.
+
+### Persistence:
+
+- Consider using databases for more persistent storage if needed (e.g., user accounts, file history).
+
+### Error Handling:
+
+- Implement robust error handling mechanisms for both frontend and backend.
+- Log errors for debugging and monitoring.
+
+### User Experience:
+
+- Optimize the code editor interface for a smooth and responsive user experience.
+
